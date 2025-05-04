@@ -61,3 +61,5 @@ Exibir estrutura de uma tabela:
 \d nome_tabela
 Sair do cliente psql:
 \q# courseservice
+
+- application local - > 0.0.1-application-properties-local
