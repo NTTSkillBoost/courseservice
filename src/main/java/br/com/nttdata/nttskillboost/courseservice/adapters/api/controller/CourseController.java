@@ -14,6 +14,7 @@ import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -40,7 +41,7 @@ public class CourseController {
     @CircuitBreaker(name = "courseService", fallbackMethod = "fallbackCreate")
     @Bulkhead(name = "courseService")
     @PostMapping
-    public ResponseEntity<CourseResponse> create(@RequestBody CourseRequest dto) {
+    public ResponseEntity<CourseResponse> create(@Valid @RequestBody CourseRequest dto) {
         // 🔥 Simular falha controlada
         if ("FAIL".equalsIgnoreCase(dto.getName())) {
             throw new RuntimeException("Falha simulada para teste de Resilience4j.");
@@ -80,7 +81,7 @@ public class CourseController {
 
     // 🔄 Atualizar
     @PutMapping("/{id}")
-    public ResponseEntity<CourseResponse> update(@PathVariable UUID id, @RequestBody CourseRequest dto) {
+    public ResponseEntity<CourseResponse> update(@PathVariable UUID id,@Valid @RequestBody CourseRequest dto) {
         Course course = courseMapper.toDomain(dto);
         Course update = updateCourseService.update(id, course);
         if (update != null) {

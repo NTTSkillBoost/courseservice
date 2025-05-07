@@ -1,7 +1,5 @@
 package br.com.nttdata.nttskillboost.courseservice.application;
 
-import br.com.nttdata.nttskillboost.courseservice.adapters.exception.BusinessException;
-import br.com.nttdata.nttskillboost.courseservice.adapters.gateway.EmployeeClient;
 import br.com.nttdata.nttskillboost.courseservice.domain.entity.Course;
 import br.com.nttdata.nttskillboost.courseservice.ports.in.CreateCourseUseCase;
 import br.com.nttdata.nttskillboost.courseservice.ports.out.CourseRepositoryPort;

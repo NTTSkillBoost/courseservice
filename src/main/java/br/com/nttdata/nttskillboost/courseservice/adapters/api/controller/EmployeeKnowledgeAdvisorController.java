@@ -12,6 +12,7 @@ import br.com.nttdata.nttskillboost.courseservice.domain.entity.Status;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class EmployeeKnowledgeAdvisorController {
     //@CircuitBreaker(name = "employeeService", fallbackMethod = "fallbackCreate")
     //@Bulkhead(name = "employeeService")
     @PostMapping
-    public ResponseEntity<EmployeeKnowledgeAdvisorResponse> create(@RequestBody EmployeeKnowledgeAdvisorRequest dto) {
+    public ResponseEntity<EmployeeKnowledgeAdvisorResponse> create(@Valid @RequestBody EmployeeKnowledgeAdvisorRequest dto) {
         // 🔥 Simular falha controlada
         if ("FAIL".equalsIgnoreCase(dto.getName())) {
             throw new RuntimeException("Falha simulada para teste de Resilience4j.");
@@ -77,7 +78,7 @@ public class EmployeeKnowledgeAdvisorController {
 
     // 🔄 Atualizar
     @PutMapping("/{id}")
-    public ResponseEntity<EmployeeKnowledgeAdvisorResponse> update(@PathVariable UUID id, @RequestBody EmployeeKnowledgeAdvisorRequest dto) {
+    public ResponseEntity<EmployeeKnowledgeAdvisorResponse> update(@PathVariable UUID id, @Valid @RequestBody EmployeeKnowledgeAdvisorRequest dto) {
         EmployeeKnowledgeAdvisor employeeKnowledgeAdvisor = employeeKnowledgeAdvisorMapper.toDomain(dto);
         EmployeeKnowledgeAdvisor update = updateEmployeeKnowledgeAdvisorService.update(id, employeeKnowledgeAdvisor);
         if (update != null) {
