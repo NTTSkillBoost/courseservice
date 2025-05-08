@@ -26,6 +26,7 @@ public class CreateEmployeeKnowledgeAdvisorService implements CreateEmployeeKnow
         if (!employeeExists) {
             throw new BusinessException("Employee ID inválido.");
         }
+
         return employeeKnowledgeAdvisorRepositoryPort.save(employeeKnowledgeAdvisor);
     }
 }

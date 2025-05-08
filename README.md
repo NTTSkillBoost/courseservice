@@ -24,6 +24,7 @@ versão com application properties sem config server
 Isso garante baixo acoplamento e alta testabilidade.
 
 docker exec -it course-service-postgres psql -U postgres
+DROP DATABASE "nkbost-course-db";
 CREATE DATABASE "nkbost-course-db";
 
 \l==
